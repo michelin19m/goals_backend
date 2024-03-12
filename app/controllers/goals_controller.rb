@@ -1,4 +1,6 @@
 class GoalsController < ApplicationController
+  include Secured
+
   def index
     goals = Goal.all
     render json: goals.as_json(methods: :total_progress)

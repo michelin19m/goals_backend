@@ -1,4 +1,6 @@
 class StatsController < ApplicationController
+  include Secured
+
   before_action :set_goal
   before_action :set_stat, only: :destroy
 
