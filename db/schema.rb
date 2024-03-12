@@ -10,8 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 0) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_07_110853) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "goals", force: :cascade do |t|
+    t.string "description"
+    t.string "short_desc"
+    t.date "target_date"
+    t.integer "target_value", default: 100
+    t.integer "starting_value", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stats", force: :cascade do |t|
+    t.bigint "goal_id", null: false
+    t.date "recorded_date"
+    t.integer "progress_value"
+    t.string "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["goal_id"], name: "index_stats_on_goal_id"
+  end
+
+  add_foreign_key "stats", "goals"
 end
