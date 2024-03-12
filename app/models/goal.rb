@@ -1,5 +1,6 @@
 class Goal < ApplicationRecord
   has_many :stats, dependent: :destroy
+  belongs_to :user
 
   validates :description, presence: true
   validates :short_desc, presence: true

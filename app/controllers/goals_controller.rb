@@ -2,12 +2,12 @@ class GoalsController < ApplicationController
   include Secured
 
   def index
-    goals = Goal.all
+    goals = @current_user.goals
     render json: goals.as_json(methods: :total_progress)
   end
 
   def create
-    goal = Goal.new(goal_params)
+    goal = Goal.new(goal_params.merge(user_id: @current_user.id))
     if goal.save
       render json: goal, status: :created
     else
